@@ -7,6 +7,6 @@ RUN apt-get update && apt-get install -yq \
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 USER gitpod
-RUN cargo install cargo-watch
+RUN  bash -lc "cargo install cargo-watch"
 
 USER root
