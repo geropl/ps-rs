@@ -5,10 +5,6 @@ RUN apt-get update && apt-get install -yq \
         # Docker rootless
         uidmap \
         iptables \
-        # Rust static binary builds
-        musl \
-        musl-dev \
-        musl-tools \
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # From: https://github.com/fornwall/rust-static-builder/blob/master/Dockerfile
@@ -26,10 +22,5 @@ RUN echo "export OPENSSL_DIR=/usr/local/musl/" >> /home/gitpod/.bashrc && \
     echo "export OPENSSL_INCLUDE_DIR=/usr/local/musl/include/" >> /home/gitpod/.bashrc && \
     echo "export OPENSSL_LIB_DIR=/usr/local/musl/lib/" >> /home/gitpod/.bashrc && \
     echo "export OPENSSL_STATIC=1" >> /home/gitpod/.bashrc
-
-USER gitpod
-RUN  bash -lc "cargo install cargo-watch"
-RUN cd /home/gitpod && \
-    .cargo/bin/rustup target add x86_64-unknown-linux-musl
 
 USER root
